@@ -113,24 +113,6 @@ class JobListPage extends React.Component {
       JobLastDate: ''
     })
   }
-  // toggle = modalType => () => {
-  //   debugger
-  //   if (!modalType) {
-  //     return this.setState({
-  //       modal: !this.state.modal,
-  //     });
-  //   }
-
-  //   this.setState({
-  //     [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
-  //   });
-  //   this.setState({
-  //     jobName: '',
-  //     jobDescription: '',
-  //     jobUrl: '',
-  //     JobLastDate: ''
-  //   })
-  // };
   onEditJob(data) {
     this.toggle('backdrop')
     this.setState({
@@ -140,7 +122,6 @@ class JobListPage extends React.Component {
       jobUrl: data.JobDetailsUrl,
       JobLastDate: data.JobLastDate
     })
-
   }
   render() {
     if (this.state.loggedIn === false) {
@@ -176,7 +157,7 @@ class JobListPage extends React.Component {
                         <td>{user.JobDetails}</td>
                         <td>{user.JobDetailsUrl}</td>
                         <td>{user.JobLastDate}</td>
-                        <td>
+                        <td className='displayFlex'>
                           <Button color="success" onClick={this.onEditJob.bind(this, user)}>
                             Edit
                           </Button>
