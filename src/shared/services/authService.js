@@ -27,7 +27,7 @@ export const loginUserCall = async (register) => {
             "Email": register.email,
             "Password": register.password
         };
-        return await postDirectCall('sp_LoginAdmin', varString).then((response) => response)
+        return await postDirectCall('proc_Login', varString).then((response) => response)
             .catch((error) => {
 
                 console.error(error);
