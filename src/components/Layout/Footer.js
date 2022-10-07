@@ -9,7 +9,7 @@ const Footer = () => {
     <Navbar>
       <Nav navbar>
         <NavItem>
-          2022 formify <SourceLink>Formify</SourceLink>
+          2022 <SourceLink>Formify</SourceLink>
         </NavItem>
       </Nav>
     </Navbar>

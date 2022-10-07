@@ -85,6 +85,7 @@ const navItems = [
   { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
   { to: '/jobList', name: 'job', exact: true, Icon: MdDashboard },
   { to: '/candidate', name: 'candidate', exact: true, Icon: MdDashboard },
+  { to: '/candidateDetails', name: 'Candidate Details', exact: false, Icon: MdWeb },
   { to: '/formDetails', name: 'Add From Data', exact: false, Icon: MdWeb },
   { to: '/cards', name: 'cards', exact: false, Icon: MdWeb },
   { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
