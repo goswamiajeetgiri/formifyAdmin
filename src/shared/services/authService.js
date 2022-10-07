@@ -25,9 +25,10 @@ export const loginUserCall = async (register) => {
         debugger
         var varString = {
             "Email": register.email,
-            "Password": register.password
+            "Password": register.password,
+            "roleId": 1
         };
-        return await postDirectCall('sp_LoginAdmin', varString).then((response) => response)
+        return await postDirectCall('proc_Login', varString).then((response) => response)
             .catch((error) => {
 
                 console.error(error);
@@ -97,4 +98,21 @@ export const addEditJob = async (data) => {
         }, 1000);
     }
 }
+export const getCandidateList = async (data) => {
+    try {
+        debugger
+        var varString = {
+            "UserId": data.CandidateId
+        };
+        return await postDirectCall('proc_getCandidateDetails', varString).then((response) => response)
+            .catch((error) => {
 
+                console.error(error);
+            });
+    }
+    catch (ex) {
+        setTimeout(() => {
+
+        }, 1000);
+    }
+}

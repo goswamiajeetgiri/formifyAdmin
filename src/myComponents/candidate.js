@@ -12,7 +12,8 @@ import {
     ModalFooter,
     ModalHeader, Form, FormGroup, Input, Label,
 } from 'reactstrap';
-import { getJobData, addEditJob } from '../shared/services/authService';
+import { getCandidateList, addEditJob } from '../shared/services/authService';
+import CandidateDetails from './candidateDetails';
 const today = new Date();
 const lastWeek = new Date(
     today.getFullYear(),
@@ -39,7 +40,8 @@ class CandidateListPage extends React.Component {
             jobName: '',
             jobDescription: '',
             jobUrl: '',
-            jobId: 0, JobLastDate: ''
+            jobId: 0, JobLastDate: '',
+            arrayData: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,13 +51,14 @@ class CandidateListPage extends React.Component {
         window.scrollTo(0, 0);
     }
     componentWillMount() {
-        this.getAllJobList('');
+        this.getCandidateList('');
     }
-    getAllJobList(data) {
+    getCandidateList(data) {
         debugger
-        getJobData(data).then(response => {
+        getCandidateList(data).then(response => {
             debugger
             if (response.ResultSets[0][0]) {
+                debugger
                 this.setState({ ListArray: response.ResultSets[0] });
             }
         }).catch(error => {
@@ -112,15 +115,9 @@ class CandidateListPage extends React.Component {
             JobLastDate: ''
         })
     }
-    onEditJob(data) {
+    viewCandidateDetails(data) {
         this.toggle('backdrop')
-        this.setState({
-            jobId: data.Jobid,
-            jobName: data.JobName,
-            jobDescription: data.JobDetails,
-            jobUrl: data.JobDetailsUrl,
-            JobLastDate: data.JobLastDate
-        })
+        this.setState({ arrayData: data });
     }
     render() {
         if (this.state.loggedIn === false) {
@@ -136,31 +133,34 @@ class CandidateListPage extends React.Component {
                     <Col>
                         <Card className="mb-3">
                             <CardHeader className="nav-button-css">Candidate List
-                                <Button onClick={this.toggle.bind(this, 'backdrop')}>Add Candidate</Button>
+                                {/* <Button onClick={this.toggle.bind(this, 'backdrop')}>Add Candidate</Button> */}
                             </CardHeader>
                             <CardBody>
                                 <Table responsive>
                                     <thead>
                                         <tr>
-                                            <th>Job Name</th>
-                                            <th>Job Details</th>
-                                            <th>Job Details Url</th>
-                                            <th>Job Last Date</th>
-                                            <th>Action</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Date Of Birth</th>
+                                            <th>Gender</th>
+                                            <th>Phone No</th>
+                                            <th>Email</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {this.state.ListArray && this.state.ListArray.map(user =>
-                                            <tr key={user.Jobid}>
-                                                <td>{user.JobName}</td>
-                                                <td>{user.JobDetails}</td>
-                                                <td>{user.JobDetailsUrl}</td>
-                                                <td>{user.JobLastDate}</td>
+                                            <tr key={user.u_u_userId}>
+                                                <td>{user.u_firstName}</td>
+                                                <td>{user.u_lastName}</td>
+                                                <td>{user.u_dateOfBirth}</td>
+                                                <td>{user.u_gender}</td>
+                                                <td>{user.u_phone}</td>
+                                                <td>{user.u_email}</td>
                                                 <td className='displayFlex'>
-                                                    <Button color="success" onClick={this.onEditJob.bind(this, user)}>
+                                                    {/* <Button color="success" onClick={this.viewCandidateDetails.bind(this, user)}>
                                                         Edit
-                                                    </Button>
-                                                    <Button color="primary" onClick={this.onEditJob.bind(this, user)}>
+                                                    </Button> */}
+                                                    <Button color="primary" onClick={this.viewCandidateDetails.bind(this, user)}>
                                                         View
                                                     </Button>
                                                 </td>
@@ -172,40 +172,17 @@ class CandidateListPage extends React.Component {
                         </Card>
                     </Col>
 
-                    <Modal
+                    <Modal className="modalDisplay"
                         isOpen={this.state.modal_backdrop}
                         toggle={this.toggle.bind(this, 'backdrop')}
                         backdrop={this.state.backdrop}>
                         <ModalHeader toggle={this.toggle.bind(this, 'backdrop')}>
-                            Add/Edit Job
                         </ModalHeader>
                         <ModalBody>
-                            <Form onSubmit={this.handleSubmit}>
-                                <FormGroup>
-                                    <Label for="jobName">Job Name</Label>
-                                    <Input type="text" name="jobName" placeholder="Job Name" onChange={this.handleChange} value={this.state.jobName} />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="jobDescription">Job Description</Label>
-                                    <Input type="text" name="jobDescription" placeholder="Job Description" value={this.state.jobDescription} onChange={this.handleChange} />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="jobUrl">Job Url</Label>
-                                    <Input type="text" name="jobUrl" placeholder="Job Url" value={this.state.jobUrl} onChange={this.handleChange} />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="exampleDate">Job Last Date</Label>
-                                    <Input
-                                        type="date"
-                                        name="JobLastDate"
-                                        id="exampleDate"
-                                        placeholder="date placeholder"
-                                        value={this.state.JobLastDate} onChange={this.handleChange}
-                                    />
-                                </FormGroup>
-                            </Form>
+                            <CandidateDetails arrayData={this.state.arrayData}></CandidateDetails>
+
                         </ModalBody>
-                        <ModalFooter>
+                        {/* <ModalFooter>
                             <Button color="secondary" onClick={this.toggle.bind(this, 'backdrop')}>
                                 Cancel
                             </Button>{' '}
@@ -213,7 +190,7 @@ class CandidateListPage extends React.Component {
                                 sAVE
                             </Button>
 
-                        </ModalFooter>
+                        </ModalFooter> */}
                     </Modal>
                 </Row>
             </Page>
