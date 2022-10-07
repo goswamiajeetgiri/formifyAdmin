@@ -88,7 +88,7 @@ class AuthForm extends React.Component {
       loginUserCall(data).then(response => {
         debugger
         if (response.ResultSets.length > 1) {
-          if (response.ResultSets[1][0].Status == 1) {
+          if (response.ResultSets[0][0].Status == 1) {
             localStorage.setItem("token", "djhajshjkjdshjh12alsl")
             this.setState({ loggedIn: true })
             // this.props.history.push('/dashboard');
