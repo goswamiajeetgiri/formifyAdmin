@@ -29,6 +29,8 @@ const JobListPage = React.lazy(() => import('myComponents/jobList'));
 const CandidateListPage = React.lazy(() => import('myComponents/candidate'));
 const FormDetails = React.lazy(() => import('myComponents/formDetail'));
 const CandidateDetails = React.lazy(() => import('myComponents/candidateDetails'));
+const userDlRequests = React.lazy(() => import('myComponents/userDlRequests'));
+const UserFormRequestsListPage = React.lazy(() => import('myComponents/UserFormRequests'));
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
 };
@@ -71,6 +73,8 @@ class MainApp extends React.Component {
                 <Route exact path="/candidate" component={CandidateListPage} />
                 <Route exact path="/jobList" component={JobListPage} />
                 <Route exact path="/candidateDetails" component={CandidateDetails} />
+                <Route exact path="/DLrequests" component={userDlRequests} />
+                <Route exact path="/UserFormsrequests" component={UserFormRequestsListPage} />
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 <Route exact path="/buttons" component={ButtonPage} />
                 <Route exact path="/formDetails" component={FormDetails} />

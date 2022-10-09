@@ -37,10 +37,16 @@
 .nav-button-css {
   display: flex;
   justify-content: space-between;
+  color: aliceblue;
+  background: linear-gradient(to bottom, #6a82fb, #fc5c7d);
+  //background-color:deepskyblue;
 }
+
+
 
 .displayFlex {
   display: flex;
+  width: '50px';
 }
 
 .modalDisplay {
