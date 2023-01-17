@@ -10,7 +10,7 @@ export const getDLRequestsData = async (data) => {
         var varString = {
             "JobId": data.JobId
         };
-        return await postDirectCall('proc_getAll_DLRequests', varString).then((response) => response)
+        return await postDirectCall('proc_getAll_DLRequests_WEB', varString).then((response) => response)
             .catch((error) => {
 
                 console.error(error);
@@ -30,7 +30,7 @@ export const getUserFormsRequestsData = async (data) => {
         var varString = {
             "JobId": data.JobId
         };
-        return await postDirectCall('proc_getAll_UserFormsRequests', varString).then((response) => response)
+        return await postDirectCall('proc_getAll_UserFormsRequests_WEB', varString).then((response) => response)
             .catch((error) => {
 
                 console.error(error);
